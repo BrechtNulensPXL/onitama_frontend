@@ -1,0 +1,43 @@
+.messagebox {
+    position: absolute;
+    bottom: 12px;
+    right: 12px; 
+    display: flex;
+    width: clamp(280px, 50vw, 350px);
+    height: 60px;
+    padding: 12px 6px;
+    background-color: hsl(0, 0%, 8%);
+    border-radius: 8px;
+    align-items: center;
+}
+
+.messagebox .messagedismiss {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid grey;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.messagebox .messagetext {
+    margin-left: 12px;
+}
+
+.error {
+    color: rgb(211, 0, 0);
+    border: 2px solid rgb(211, 0, 0);
+}
+.warning {
+    color: rgb(255, 179, 0);
+    border: 2px solid rgb(255, 179, 0);
+}
+.confirmation {
+    color: rgb(0, 211, 0);
+    border: 2px solid rgb(0, 211, 0);
+}
+.action {
+    color: rgb(0, 34, 255);
+    border: 2px solid rgb(0, 34, 255);
+}

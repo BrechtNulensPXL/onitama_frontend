@@ -3,41 +3,69 @@
     bottom: 12px;
     right: 12px; 
     display: flex;
+    align-items: center;
     width: clamp(280px, 50vw, 350px);
     height: 60px;
-    padding: 12px 6px;
-    background-color: hsl(0, 0%, 8%);
-    border-radius: 8px;
-    align-items: center;
+    padding: 12px 16px;
+    color: white;
 }
 
 .messagebox .messagedismiss {
+    position: relative;
     display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid grey;
+    width: 10%;
+    height: auto;
+    max-height: 40px;
+    aspect-ratio: 1 / 1;
+    /* border: 1px solid red; */
+    border: 0px solid transparent;
     background-color: transparent;
     cursor: pointer;
 }
+.messagebox .messagedismiss::after, 
+.messagebox .messagedismiss::before  {
+    content: "";
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    width: 2px;
+    height: 80%;
+    background-color: grey;
+    z-index: 10;
+    margin: 0 auto;
+}
+.messagebox .messagedismiss::after {
+    transform: rotate(45deg);
+}
+.messagebox .messagedismiss::before {
+    transform: rotate(315deg);
+}
+.messagebox .messagedismiss:hover::after, 
+.messagebox .messagedismiss:hover::before  {
+    background-color: white;
+}
 
 .messagebox .messagetext {
+    font-size: 12px;
     margin-left: 12px;
+    width: 80%;
+}
+
+.messagebox .messageicon {
+    display: block;
+    width: 26px;
+    height: 26px;
 }
 
 .error {
-    color: white;
-    border: 2px solid rgb(211, 0, 0);
+    background: hsl(3, 83%, 52%);
 }
 .warning {
-    color: white;
-    border: 2px solid rgb(255, 179, 0);
+    background: hsl(50, 99%, 47%);
 }
 .confirmation {
-    color: white;
-    border: 2px solid rgb(0, 211, 0);
+    background: hsl(97, 100%, 29%);
 }
 .action {
-    color: white;
-    border: 2px solid rgb(0, 34, 255);
+    background: hsl(0, 0%, 0%);
 }

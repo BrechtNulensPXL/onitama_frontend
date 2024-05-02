@@ -26,18 +26,18 @@
 }
 
 .error {
-    color: rgb(211, 0, 0);
+    color: white;
     border: 2px solid rgb(211, 0, 0);
 }
 .warning {
-    color: rgb(255, 179, 0);
+    color: white;
     border: 2px solid rgb(255, 179, 0);
 }
 .confirmation {
-    color: rgb(0, 211, 0);
+    color: white;
     border: 2px solid rgb(0, 211, 0);
 }
 .action {
-    color: rgb(0, 34, 255);
+    color: white;
     border: 2px solid rgb(0, 34, 255);
 }

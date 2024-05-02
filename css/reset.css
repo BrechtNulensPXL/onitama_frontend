@@ -4,7 +4,7 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    font-family: "Helvetica", "sans-serif";
+    font-family: "Tahoma", "sans-serif";
     scrollbar-width: thin;
     scrollbar-color: transparent;
 }
@@ -26,4 +26,7 @@ a {
     color: inherit;
     cursor: pointer;
 }
-  
+
+.hidden {
+    display: none;
+}

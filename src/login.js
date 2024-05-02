@@ -101,13 +101,13 @@ const handleLogin = (event) => {
   // JSON stringify to pass into request body
   const JSONformData = JSON.stringify(loginFormDataEntries);
 
-  fetch("https://localhost:5001/api/Authentication/token", {
+  fetch(`https://localhost:${PORT}/api/Authentication/token`, {
     method: "POST",
     body: JSONformData,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "http://localhost:5173",
+      "Access-Control-Allow-Origin": `http://localhost:${PORT}`,
     },
   })
     .then((res) => res.json())

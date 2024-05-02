@@ -12,12 +12,38 @@
         <nav class="">
             <ul>
                 <li><a href="/index.html">Home</a></li>
-                <li><a href="/login.html">Login</a></li>
                 <li><a href="/register.html">Register</a></li>
                 <li><a href="/translate.html">Translate</a></li>
             </ul>
         </nav>
-        <div class="inner-wrapper"></div>
+        <div class="inner-wrapper">
+            <div class="form-wrapper">
+                <form class="login-form" id="login-form">
+                    <div class="login-form-header">
+                        <h1 class="h1 main-title hidden" id="title">Onitama</h1>
+                        <img src="" alt="onitama_logo" id="logo">
+                        <h2>Login</h1>
+                    </div>
+                    <div class="login-form-body">
+                        <label for="email">Email</label>
+                        <input type="email" placeholder="Enter Email" name="email" id="email-input" required>
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Enter Password" name="password" id="password-input" required>
+
+                        <div class="password-view-wrapper">
+                            <label for="showPasswd" id="label_showPasswd">Show Password</label>
+                            <input type="checkbox" id="showPassword">
+                        </div>
+                        <div class="message-box" id="message-box"></div>
+                    </div>
+                    <div class="login-form-footer">
+                        <a href="register.html">No account? Sign up here</a>
+                        <button type="submit" name="login" id="login-button">Login</button>
+                        <a href="team.html">Meet the team!</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

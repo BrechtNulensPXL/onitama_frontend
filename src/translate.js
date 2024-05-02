@@ -28,9 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     if (language == "nl") {
       localStorage.setItem("language", "en");
-    }
-    if (language == "en") {
+    } else if (language == "en") {
       localStorage.setItem("language", "nl");
+    } else {
+      localStorage.setItem("language", "en");
     }
     language = localStorage.getItem("language");
     fetchAndDisplayTranslation(language);

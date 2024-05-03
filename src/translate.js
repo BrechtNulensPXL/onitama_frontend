@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // console.log("Loaded");
   localStorage.setItem("language", "nl");
   let language = localStorage.getItem("language");
 
@@ -10,8 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`./languages/${lang}.json`)
       .then((response) => response.json())
       .then((data) => {
-        textNodesArray.forEach((textNode, i) => {
-          let textContent = document.createTextNode(Object.values(data)[i]);
+        textNodesArray.forEach((textNode) => {
+          if (textNode.hasChildNodes()) {
+            textNode.removeChild(textNode.childNodes[0]);
+          }
+          const translationKey = textNode.getAttribute("data-translation");
+          let textContent = document.createTextNode(data[translationKey]);
           textNode.appendChild(textContent);
         });
       })
@@ -20,22 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchAndDisplayTranslation(language);
 
-  // Translate button interaction
-  let translateButton = document.getElementById("translate-button");
-  translateButton.addEventListener("click", () => {
-    textNodesArray.forEach((textNode) => {
-      textNode.removeChild(textNode.childNodes[0]);
+  // Translate buttons - reference and copy
+  const translateButtonCollection =
+    document.getElementsByClassName("translate-button");
+  let translateButtons = [...translateButtonCollection];
+
+  // Get language value from each button separately
+  // Set language according localStorage
+  translateButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      localStorage.setItem("language", e.target.dataset.language);
+      language = localStorage.getItem("language");
+      fetchAndDisplayTranslation(language);
     });
-    if (language == "nl") {
-      localStorage.setItem("language", "en");
-    } else if (language == "en") {
-      localStorage.setItem("language", "nl");
-    } else {
-      localStorage.setItem("language", "en");
-    }
-    language = localStorage.getItem("language");
-    fetchAndDisplayTranslation(language);
-    // console.log(language);
   });
 });
 

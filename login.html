@@ -3,42 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <!-- CSS with media query -->
+    <link rel="stylesheet"
+            media="screen and (min-width: 280px) and (max-width: 480px)"
+            href="css/mobile/login/small.css">
+    <link rel="stylesheet"
+            media="screen and (min-width: 480px) and (max-width: 768px)"
+            href="css/mobile/login/large.css">
+    <link rel="stylesheet"
+        media="screen and (min-width: 768px) and (max-width: 1024px)"
+        href="css/desktop/login/small.css">
+    <link rel="stylesheet"
+        media="screen and (min-width: 1024px)"
+        href="css/desktop/login/large.css">
     <title>Login</title>
 </head>
 <body>
     <div class="outer-wrapper">
-        <nav class="">
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/register.html">Register</a></li>
-                <li><a href="/translate.html">Translate</a></li>
-            </ul>
-        </nav>
         <div class="inner-wrapper">
+            <div class="message-box-wrapper"></div>
             <div class="form-wrapper">
                 <form class="login-form" id="login-form">
                     <div class="login-form-header">
                         <h1 class="h1 main-title hidden" id="title">Onitama</h1>
-                        <img src="" alt="onitama_logo" id="logo">
-                        <h2>Login</h1>
+                        <img src="assets/images/Onitama_Logo.svg.png" alt="onitama_logo" id="logo">
+                        <h2>Login</h2>
                     </div>
                     <div class="login-form-body">
-                        <label for="email">Email</label>
-                        <input type="email" placeholder="Enter Email" name="email" id="email-input" required>
-                        <label for="password">Password</label>
-                        <input type="password" placeholder="Enter Password" name="password" id="password-input" required>
-
-                        <div class="password-view-wrapper">
+                        <div class="login-form-field">
+                            <label class="hidden" for="email">Email</label>
+                            <img src="assets/icons/black/user_icon_black.svg" alt="user_icon">
+                            <input type="email" placeholder="Email" name="email" id="email-input" required>
+                        </div>
+                       <div class="login-form-field">
+                            <label  class="hidden" for="password">Password</label>
+                            <img src="assets/icons/black/check_icon_black.svg" alt="password_icon">
+                            <input type="password" placeholder="Password" name="password" id="password-input" required>
+                            <button id="showPasswd">embed eye here</button>
+                       </div>
+                        <!-- <div class="password-view-wrapper">
                             <label for="showPasswd" id="label_showPasswd">Show Password</label>
                             <input type="checkbox" id="showPassword">
-                        </div>
-                        <div class="message-box" id="message-box"></div>
+                        </div> -->
                     </div>
                     <div class="login-form-footer">
-                        <a href="register.html">No account? Sign up here</a>
                         <button type="submit" name="login" id="login-button">Login</button>
+                        <a href="register.html">No account? Sign up here</a>
                         <a href="team.html">Meet the team!</a>
                     </div>
                 </form>

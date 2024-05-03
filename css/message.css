@@ -1,12 +1,11 @@
 .messagebox {
-    position: absolute;
-    bottom: 12px;
-    right: 12px; 
     display: flex;
     align-items: center;
     width: clamp(280px, 50vw, 350px);
     height: 60px;
+    flex-shrink: 0;
     padding: 12px 16px;
+    margin-top: 12px;
     color: white;
 }
 

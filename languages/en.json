@@ -16,6 +16,9 @@
     "message.confirm.login": "Logged in ! Welcome to Onitama !",
     "message.confirm.logout": "Successfully logged out ! Until next time !",
     "message.confirm.register": "Welcome to Onitama ! Glad to have you on board !",
-    "message.action.join": "",
-    "message.action.leave": ""
+    "message.action.table.user.join": "Joined a table. Waiting for the owner to start the game.",
+    "message.action.table.user.leave": "You left a table.",
+    "message.action.table.user.owner": "You became the owner of a table.",
+    "message.action.table.opponent.join": "A new player has joined the table.",
+    "message.action.table.opponent.leave": "A player has left the table."
 }

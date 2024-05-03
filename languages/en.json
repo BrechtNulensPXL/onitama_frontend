@@ -1,8 +1,21 @@
 {
-    "text-0": "hello",
-    "text-1": "I am",
-    "text-2": "under the",
-    "text-3": "water",
-    "text-4": "please help",
-    "text-5": "blublublu"
+    "nav.home": "Home",
+    "nav.login": "Login",
+    "nav.register": "Register",
+    "nav.translate": "Translate",
+    "lobby.title": "Lobby",
+    "lobby.gamelist": "Looking to play",
+    "message.error.denied": "You cannot do this action",
+    "message.error.fault": "Could not log in. The server is down.",
+    "message.error.service": "Could not log in. Are you registered ?",
+    "message.warning.credentials": "Username or password is not correct",
+    "message.warning.nocredentials": "Please fill out all fields",
+    "message.warning.redirect.login": "You will be redirected to login shortly",
+    "message.warning.redirect.register": "You will be redirected to register shortly",
+    "message.warning.redirect.lobby": "You will be redirected to the lobby shortly",
+    "message.confirm.login": "Logged in ! Welcome to Onitama !",
+    "message.confirm.logout": "Successfully logged out ! Until next time !",
+    "message.confirm.register": "Welcome to Onitama ! Glad to have you on board !",
+    "message.action.join": "",
+    "message.action.leave": ""
 }

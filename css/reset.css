@@ -20,6 +20,12 @@
     border-radius: 20px;
     border: 2px solid transparent;
 }
+:root {
+    --warning: hsl(50, 99%, 47%);
+    --ok: hsl(97, 100%, 29%);
+    --error: hsl(3, 83%, 52%);
+    --action: hsl(0, 0%, 0%);
+}
 
 a {
     text-decoration: none;

@@ -1,0 +1,57 @@
+.outer-wrapper {
+    width: 100%;
+    height: 100vh;
+}
+
+.outer-wrapper .inner-wrapper {
+    width: 95%;
+    height: 100%;
+    margin: 0 auto;
+}
+.outer-wrapper .inner-wrapper .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.outer-wrapper .inner-wrapper .login-form .login-form-header {
+    border: 1px solid green;
+}
+.outer-wrapper .inner-wrapper .login-form .login-form-header > img{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.outer-wrapper .inner-wrapper .login-form .login-form-body {
+    width: 100%;
+    height: 60vh;
+    border: 1px solid purple;
+}
+.outer-wrapper .inner-wrapper .login-form .login-form-body .login-form-field {
+    display: flex;
+    align-items: center;
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 6px 4px;
+    max-width: 456px;
+}
+.outer-wrapper .inner-wrapper .login-form .login-form-body .login-form-field > img {
+    height: 24px;
+    width: auto;
+    aspect-ratio: 1;
+}
+.outer-wrapper .inner-wrapper .login-form .login-form-body .login-form-field > input {
+    border: transparent;
+}
+
+.outer-wrapper .inner-wrapper .login-form .login-form-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.outer-wrapper .inner-wrapper .login-form .login-form-footer #login-button {
+    width: 100%;
+    height: 50px;
+    color: white;
+    border: none;
+    background-color: black;
+}

@@ -1,132 +1,160 @@
-"use strict";
+("use strict");
+import { createMessageBox } from "./messaging.js";
+
+const PORT = 5051;
+
+// Check if a token is already assigned and redirect to waitingroom if true
+// if (sessionStorage.getItem("token")) {
+//   window.location.replace("waitingroom.html");
+// }
 
 // Regular expressions
-let emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
-let loginButton = document.getElementById("login-button");
-loginButton.setAttribute("disabled", true);
+const loginState = {
+  email: {
+    value: null,
+    isValid: false,
+    errorMessage: "",
+  },
+  password: {
+    value: null,
+    isValid: false,
+    errorMessage: "",
+  },
+};
 
 // Toggle Password visibility
-let showPasswordBox = document.getElementById("showPassword");
-const makePasswordVisible = (event) => {
-  let passwordInput = document.getElementById("password-input");
-  if (event.target.checked) {
-    passwordInput.type = "text";
-  } else {
+const passwordInput = document.getElementById("password-input");
+const passwordVisibilityButton = document.getElementById("showPassword");
+passwordVisibilityButton.addEventListener("click", () => {
+  if (passwordInput.type == "text") {
     passwordInput.type = "password";
+  } else {
+    passwordInput.type = "text";
   }
-};
-showPasswordBox.addEventListener("click", makePasswordVisible);
-
-// Display an error message
-const displayMessage = (message) => {
-  let messageBox = document.getElementsByClassName("message-box")[0];
-  let messageWrapper = document.createElement("div");
-  messageWrapper.classList.add("message-box");
-  let messageTextNode = document.createTextNode(message);
-
-  messageWrapper.appendChild(messageTextNode);
-  messageBox.appendChild(messageWrapper);
-  return messageBox;
-};
+});
 
 // Determine which error to be displayed
-const determineErrorMessage = (response) => {
-  console.log(response);
+const determineFeedbackMessage = (response) => {
+  console.log("response", response);
   if (!response) {
-    console.log("hello");
-  } else if (response > 0) {
-    switch (key) {
-      case response === 200:
-        displayMessage("ok", "Login succeeded");
-        console.log("Good");
+    createMessageBox("error", "message.error.fault");
+  } else {
+    switch (response) {
+      case 200:
+        createMessageBox("confirmation", "message.confirm.register");
         break;
-      case response === 400:
-        displayMessage("warning", "User already exists");
-        console.log("Already Exists");
+      case 201:
+        createMessageBox("confirmation", "message.confirm.register");
         break;
-      case response === 404:
-        displayMessage("error", "User not found");
-        console.log("Not found !");
+      case 400:
+        createMessageBox("error", "message.error.noaccount");
+        break;
+      case 404:
+        createMessageBox("error", "message.error.denied");
+        break;
+      case 500:
+        createMessageBox("error", "message.error.denied");
         break;
       default:
-        response === undefined;
+        createMessageBox("error", "message.error.fault");
         break;
     }
   }
 };
 
-// Check if all fields are filled
-const handleInput = (event) => {
-  let targetId = event.target.id;
-  let targetName = event.target.name;
-  let targetValue = event.target.value;
-
-  if (targetName == "email") {
-    let emailInputElement = document.getElementById(targetId);
-    if (emailRegex.test(targetValue)) {
-      emailInputElement.style.border = "2px solid var(--ok)";
-    } else if (targetValue == "") {
-      emailInputElement.style.border = "2px solid var(--warning)";
-      loginButton.setAttribute("disabled", true);
-    } else {
-      emailInputElement.style.border = "2px solid var(--light-grey)";
-    }
-  } else if (targetName == "password") {
-    let passwordInputElement = document.getElementById(targetId);
-    if (passwordRegex.test(targetValue)) {
-      passwordInputElement.style.border = "2px solid var(--ok)";
-      loginButton.removeAttribute("disabled");
-    } else if (targetValue == "") {
-      passwordInputElement.style.border = "2px solid var(--warning)";
-      loginButton.setAttribute("disabled", true);
-    } else {
-      passwordInputElement.style.border = "2px solid var(--light-grey)";
-    }
-  }
-};
+//
+let inputCollection = document.getElementsByClassName("login-form-field");
+const inputsArray = [...inputCollection];
 
 // Form Elements
 let loginForm = document.getElementById("login-form");
-let registerForm = document.getElementById("register-form");
+// let registerForm = document.getElementById("register-form");
 
 const handleLogin = (event) => {
   event.preventDefault();
+  inputsArray.forEach((inp) => {
+    let fieldInput = inp.getElementsByTagName("input");
+    let fieldInputTypeValue = fieldInput[0].attributes["type"].value;
+    let fieldInputValue = fieldInput[0].value;
+    let fieldInputParent = fieldInput[0].parentNode;
 
-  // FormData puts all inputs as key-value pairs
-  const loginFormData = new FormData(loginForm);
-  // We make an object from these entries
-  const loginFormDataEntries = Object.fromEntries(loginFormData.entries());
-  // JSON stringify to pass into request body
-  const JSONformData = JSON.stringify(loginFormDataEntries);
+    if (fieldInputTypeValue == "email") {
+      if (emailRegex.test(fieldInputValue)) {
+        const emailStateObject = {
+          value: fieldInputValue,
+          errorMessage: "Is a valid email",
+          isValid: true,
+        };
+        loginState.email = emailStateObject;
+      } else {
+        const emailStateObject = {
+          value: fieldInputValue,
+          errorMessage: "Is not a valid email",
+          isValid: false,
+        };
+        loginState.email = emailStateObject;
+        fieldInputParent.style.border = "2px solid var(--error)";
+      }
+    } else if (fieldInputTypeValue == "password") {
+      if (passwordRegex.test(fieldInputValue)) {
+        const passwordStateObject = {
+          value: fieldInputValue,
+          errorMessage: "Is a valid email",
+          isValid: true,
+        };
+        loginState.password = passwordStateObject;
+      } else {
+        const passwordStateObject = {
+          value: fieldInputValue,
+          errorMessage: "Is not a valid password",
+          isValid: false,
+        };
+        loginState.password = passwordStateObject;
+        fieldInputParent.style.border = "2px solid var(--error)";
+      }
+    }
+  });
 
-  fetch(`https://localhost:${PORT}/api/Authentication/token`, {
-    method: "POST",
-    body: JSONformData,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": `http://localhost:${PORT}`,
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      // if (!data) {
-      //     displayMessage("warning")
-      //     console.log(data)
-      // } else {
-      //     console.log(data)
-      //     displayMessage("ok");
-      //     window.sessionStorage.setItem('token', data.token);
-      //     setTimeout(() => {
-      //        window.location.href = 'TODO';
-      //     }, 3000);
-      // }
+  if (!Object.values(loginState).every((v) => v.isValid)) {
+    // If one of the inputs return false a single message will be displayed
+    createMessageBox("error", "message.error.invalid.credentials");
+  } else {
+    // FormData puts all inputs as key-value pairs
+    const loginFormData = new FormData(loginForm);
+    // We make an object from these entries
+    const loginFormDataEntries = Object.fromEntries(loginFormData.entries());
+    // JSON stringify to pass into request body
+    const JSONformData = JSON.stringify(loginFormDataEntries);
+
+    fetch(`https://localhost:${PORT}/api/Authentication/token`, {
+      method: "POST",
+      body: JSONformData,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": `http://localhost:8081`,
+      },
     })
-    .catch((err) => console.log(err));
+      .then((res) => {
+        determineFeedbackMessage(res.status);
+        return res.json();
+      })
+      // .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        window.sessionStorage.setItem("token", data.token);
+        setTimeout(() => {
+          window.location.href = "lobby.html";
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+        determineFeedbackMessage(null);
+      });
+  }
 };
 
-loginForm.addEventListener("input", handleInput);
 loginForm.addEventListener("submit", handleLogin);

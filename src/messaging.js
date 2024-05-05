@@ -1,16 +1,32 @@
+let en;
+let nl;
+
+const getLanguages = async () => {
+  const response_english = await fetch("../languages/en.json");
+  const response_dutch = await fetch("../languages/nl.json");
+  const json_english = await response_english.json();
+  const json_dutch = await response_dutch.json();
+
+  en = json_english;
+  nl = json_dutch;
+};
+getLanguages();
+
 let messageBoxCollection = [];
-let counter = 0;
-const innerWrapper = document.getElementsByClassName("inner-wrapper")[0];
 const messageBoxWrapper = document.getElementsByClassName(
   "message-box-wrapper"
 )[0];
-const generateMessageButton = document.getElementById("generate-message");
+// const generateMessageButton = document.getElementById("generate-message");
 
 // Create a message element and display it
-const createMessageBox = (status, message) => {
+export const createMessageBox = (status, translationKey) => {
+  const currentLanguage = localStorage.getItem("language") || "en";
+  const translations = currentLanguage === "en" ? en : nl;
+
+  const message = translations[translationKey];
   let messageBoxElement = document.createElement("div");
   let messageBoxParagraph = document.createElement("p");
-  let messageBoxTextNode = document.createTextNode(`${message} ${counter + 1}`);
+  let messageBoxTextNode = document.createTextNode(`${message}`);
   let messageBoxDismissButton = document.createElement("button");
   let messageBoxImage = document.createElement("img");
 
@@ -23,8 +39,6 @@ const createMessageBox = (status, message) => {
   messageBoxParagraph.className = "messagetext";
   messageBoxDismissButton.className = "messagedismiss";
   messageBoxImage.className = "messageicon";
-
-  counter++;
 
   switch (status) {
     case "error":
@@ -76,10 +90,10 @@ const removeMessageBox = (element) => {
   console.log("collection popped", messageBoxCollection.length);
 };
 
-createMessageBox("confirmation", "Some confirm");
-createMessageBox("error", "Some error");
-createMessageBox("warning", "Some warning");
-createMessageBox("action", "Some action");
+// createMessageBox("confirmation", "Some confirm");
+// createMessageBox("error", "message.error.denied");
+// createMessageBox("warning", "Some warning");
+// createMessageBox("action", "Some action");
 
 // Automatic messagebox dismissal after 3 seconds
 // const messageBoxTimer = () => {
@@ -99,15 +113,15 @@ createMessageBox("action", "Some action");
 // messageBoxCollection.length == 0 ? stopMessageBoxTimer() : messageBoxTimeout;
 
 // Create a message on button press
-generateMessageButton.addEventListener("click", () => {
-  createMessageBox("action", "Message created");
-  // Start a new timer for the new message
-  // setTimeout(messageBoxTimer, 3000);
-  if (messageBoxCollection.length > 6) {
-    generateMessageButton.setAttribute("enabled", false);
-    return;
-    // createMessageBox("error", "Too much info");
-  } else {
-    generateMessageButton.setAttribute("enabled", true);
-  }
-});
+// generateMessageButton.addEventListener("click", () => {
+//   createMessageBox("action", "nav.home");
+//   // Start a new timer for the new message
+//   // setTimeout(messageBoxTimer, 3000);
+//   if (messageBoxCollection.length > 6) {
+//     generateMessageButton.setAttribute("enabled", false);
+//     return;
+//     // createMessageBox("error", "Too much info");
+//   } else {
+//     generateMessageButton.setAttribute("enabled", true);
+//   }
+// });

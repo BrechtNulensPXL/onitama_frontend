@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/message.css">
+    <script defer src="src/translate.js"></script>
     <script defer src="src/messaging.js"></script>
     <title>Index</title>
 </head>
@@ -13,14 +14,17 @@
     <div class="outer-wrapper">
         <nav>
             <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/login.html">Login</a></li>
-                <li><a href="/register.html">Register</a></li>
-                <li><a href="/translate.html">Translate</a></li>
+                <li><a href="/login.html" class="text-node" data-translation="nav.login"></a></li>
+                <li><a href="/register.html" class="text-node" data-translation="nav.register"></a></li>
+                <li><a href="/translate.html" class="text-node" data-translation="nav.translate"></a></li>
             </ul>
         </nav>
         <div class="inner-wrapper">
-            <button id="generate-message" class="interact">New Message</button>
+            <div class="message-box-wrapper"></div>
+            <!-- <button id="generate-message" class="interact">New Message</button> -->
+            <button class="translate-button" data-language="nl">NL</button>
+            <button class="translate-button" data-language="en">EN</button>
+            <button id="generate-message">test</button>
         </div>
     </div>
 </body>
